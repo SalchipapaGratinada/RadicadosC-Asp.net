@@ -1,0 +1,47 @@
+﻿.botonIndexTD {
+    width:180px;
+}
+.divBotonIndexTD {
+    text-align: center;
+}
+
+.cTextoKeyCons {
+    width: 100px;
+    margin: 1px 1px 4px;
+}
+
+.imgIndex {
+    width: 300px;
+    height:250px;
+}
+.divImg{
+    text-align:center;
+}
+
+.card-group{
+    margin-top: 15px;
+}
+
+.bienvenida{
+    text-align:center;
+}
+.subBienvenida{
+    font-family:monospace;
+    font-size: 4rem;
+}
+.sub2Bienvenida {
+    font-family:'Niagara Engraved';
+    font-size: 1.5rem;
+    margin-top:-80px;
+}
+.navbar {
+    font-family: monospace;
+}
+
+.card-body{
+    font-family:monospace;  
+}
+.btnCrear{
+    width:200px;
+}
+
