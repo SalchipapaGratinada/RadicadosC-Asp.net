@@ -11,7 +11,7 @@
         <label class="sub2Bienvenida"><br /> Gases Caribe ®</label>
     </div>
     <form runat="server">
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4" style="max-width:700px">
             <div class="col" style="max-width:350px">
                 <div class="card">
                     <img src="/Images/Pfour.jpg" class="imgIndex" alt="Cargando...">
@@ -35,7 +35,7 @@
         </div>
         <hr />
         <br />
-        <div class="card-group">
+        <div class="card-group" >
             <div class="card">
                 <div class="divImg">
                     <img src="/Images/Pone.png" class="imgIndex" alt="Cargando...">
