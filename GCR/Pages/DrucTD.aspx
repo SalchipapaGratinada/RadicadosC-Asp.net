@@ -14,15 +14,15 @@
         <div>
             <div class="mb-3">
                 <label class="form-label">Codigo</label>
-                <asp:TextBox runat="server" CssClass="form-control" ID="tbCodigo"></asp:TextBox>
+                <asp:TextBox MaxLength="20" runat="server" CssClass="form-control" ID="tbCodigo"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
-                <asp:TextBox runat="server" CssClass="form-control" ID="tbNombre"></asp:TextBox>
+                <asp:TextBox MaxLength="100" runat="server" CssClass="form-control" ID="tbNombre"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label class="form-label">Formato</label>
-                <asp:TextBox runat="server" CssClass="form-control" ID="tbFormato"></asp:TextBox>
+                <asp:TextBox MaxLength="100" runat="server" CssClass="form-control" ID="tbFormato"></asp:TextBox>
             </div>
             <asp:Button runat="server" CssClass="btn btn-primary" ID="btnCrear" Text="Crear" Visible="false" OnClick="btnCrear_Click" />
             <asp:Button runat="server" CssClass="btn btn-primary" ID="btnAcualizar" Text="Actualizar" Visible="false" OnClick="btnAcualizar_Click"/>

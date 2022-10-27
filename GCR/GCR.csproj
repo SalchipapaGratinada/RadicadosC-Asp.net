@@ -117,6 +117,7 @@
     <Content Include="Pages\DrucTD.aspx" />
     <Content Include="Pages\index.aspx" />
     <Content Include="Pages\Modo.aspx" />
+    <Content Include="Pages\Radicado.aspx" />
     <Content Include="Pages\TipoDocumental.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -169,6 +170,13 @@
     </Compile>
     <Compile Include="Pages\Modo.aspx.designer.cs">
       <DependentUpon>Modo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Radicado.aspx.cs">
+      <DependentUpon>Radicado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Radicado.aspx.designer.cs">
+      <DependentUpon>Radicado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\TipoDocumental.aspx.cs">
       <DependentUpon>TipoDocumental.aspx</DependentUpon>
