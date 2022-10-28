@@ -1,4 +1,5 @@
-﻿using Microsoft.SqlServer.Server;
+﻿using GCR.CadenasBd;
+using Microsoft.SqlServer.Server;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace GCR.Pages
             try
             {
                 conexion.Open();
-                string cadena = "SELECT * FROM public.tipodocumental WHERE id=" + auxId + ";";
+                string cadena = CdTipoDocumental.cargarDatos(auxId);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -93,7 +94,7 @@ namespace GCR.Pages
             {
                 try
                 {
-                    string cadena = "INSERT INTO tipodocumental(codigo, nombre, formato ) values('" + codigo + "', '" + nombre + "', '" + formato + "');";
+                    string cadena = CdTipoDocumental.insertar(codigo, nombre, formato);
                     NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                     conexion.Open();
                     cmd.ExecuteNonQuery();
@@ -120,7 +121,7 @@ namespace GCR.Pages
         {
             try
             {
-                string cadena = "DELETE FROM tipodocumental WHERE id = " + auxId + ";";
+                string cadena = CdTipoDocumental.eliminar(auxId);
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
@@ -149,7 +150,7 @@ namespace GCR.Pages
             {
                 try
                 {
-                    string cadena = "UPDATE tipodocumental SET codigo = '" + codigo + "',nombre = '" + nombre + "', formato = '" + formato + "' WHERE id = " + auxId + ";";
+                    string cadena = CdTipoDocumental.actualizar(codigo, nombre, formato, auxId);
                     NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                     conexion.Open();
                     cmd.ExecuteNonQuery();

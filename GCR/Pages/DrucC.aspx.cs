@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using GCR.CadenasBd;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -56,7 +57,7 @@ namespace GCR.Pages
             {
                 try
                 {
-                    string cadena = "UPDATE consecutivo SET consec = '" + consec + "',anio = '" + anio + "' WHERE id = " + auxId + ";";
+                    string cadena = CdConsecutivo.actualizar(consec, anio, auxId);
                     NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                     conexion.Open();
                     cmd.ExecuteNonQuery();
@@ -82,7 +83,7 @@ namespace GCR.Pages
             try
             {
                 conexion.Open();
-                string cadena = "SELECT * FROM public.consecutivo WHERE id=" + auxId + ";";
+                string cadena = CdConsecutivo.cargarDatos(auxId);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
                 DataSet ds = new DataSet();
                 ds.Clear();

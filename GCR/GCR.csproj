@@ -114,14 +114,20 @@
     <Content Include="Pages\Consecutivo.aspx" />
     <Content Include="Pages\DrucC.aspx" />
     <Content Include="Pages\DrucM.aspx" />
+    <Content Include="Pages\DrucRl.aspx" />
     <Content Include="Pages\DrucTD.aspx" />
     <Content Include="Pages\index.aspx" />
     <Content Include="Pages\Modo.aspx" />
     <Content Include="Pages\Radicado.aspx" />
+    <Content Include="Pages\Relaciones.aspx" />
     <Content Include="Pages\TipoDocumental.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CadenasBd\CdConsecutivo.cs" />
+    <Compile Include="CadenasBd\CdModo.cs" />
+    <Compile Include="CadenasBd\CdRelaciones.cs" />
+    <Compile Include="CadenasBd\CdTipoDocumental.cs" />
     <Compile Include="MP.Master.cs">
       <DependentUpon>MP.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -150,6 +156,13 @@
     <Compile Include="Pages\DrucM.aspx.designer.cs">
       <DependentUpon>DrucM.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DrucRl.aspx.cs">
+      <DependentUpon>DrucRl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\DrucRl.aspx.designer.cs">
+      <DependentUpon>DrucRl.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DrucTD.aspx.cs">
       <DependentUpon>DrucTD.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -177,6 +190,13 @@
     </Compile>
     <Compile Include="Pages\Radicado.aspx.designer.cs">
       <DependentUpon>Radicado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Relaciones.aspx.cs">
+      <DependentUpon>Relaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Relaciones.aspx.designer.cs">
+      <DependentUpon>Relaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\TipoDocumental.aspx.cs">
       <DependentUpon>TipoDocumental.aspx</DependentUpon>

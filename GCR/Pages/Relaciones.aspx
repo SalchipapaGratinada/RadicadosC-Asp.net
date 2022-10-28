@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MP.Master" AutoEventWireup="true" CodeBehind="TipoDocumental.aspx.cs" Inherits="GCR.Pages.TipoDocumental" EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MP.Master" AutoEventWireup="true" CodeBehind="Relaciones.aspx.cs" Inherits="GCR.Pages.Relaciones" EnableEventValidation="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titulo" runat="server">
-    Gestion Tipo Documental
+    Relaciones
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -8,19 +8,19 @@
     <form runat="server">
         <br />
         <div class="mx-auto" style="width: 300px">
-            <h2>Lista Tipos Documentales</h2>
+            <h2>Lista Relaciones</h2>
         </div>
         <div class="container">
             <div class="row">
                 <div class="mx-auto" style="width:300px">
-                    <asp:Button runat="server" ID="btnCrearTD"  CssClass="btn btn-primary form-control-sm btnCrear" Text="Crear" OnClick="btnCrearTD_Click" />
+                    <asp:Button runat="server" ID="btnCrearRl"  CssClass="btn btn-primary form-control-sm btnCrear" Text="Crear" OnClick="btnCrearRl_Click" />
                 </div>
             </div>
         </div>
         <br />
         <div class="container">
             <div class="table small">
-                <asp:GridView runat="server" ID="gvtipodocumental" class="table table-borderless table-hover">
+                <asp:GridView runat="server" ID="gvrelaciones" class="table table-borderless table-hover">
                     <Columns>
                         <asp:TemplateField HeaderText="Opciones">
                             <ItemTemplate>

@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using GCR.CadenasBd;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -65,7 +66,7 @@ namespace GCR.Pages
             {
                 try
                 {
-                    string cadena = "INSERT INTO modo(codigo, nombre ) values('" + codigo + "', '" + nombre +"');";
+                    string cadena = CdModo.insertar(codigo, nombre);
                     NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                     conexion.Open();
                     cmd.ExecuteNonQuery();
@@ -94,7 +95,7 @@ namespace GCR.Pages
             {
                 try
                 {
-                    string cadena = "UPDATE modo SET codigo = '" + codigo + "',nombre = '" + nombre + "' WHERE id = " + auxId + ";";
+                    string cadena = CdModo.actualizar(codigo, nombre, auxId);
                     NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                     conexion.Open();
                     cmd.ExecuteNonQuery();
@@ -115,7 +116,7 @@ namespace GCR.Pages
         {
             try
             {
-                string cadena = "DELETE FROM modo WHERE id = " + auxId + ";";
+                string cadena = CdModo.eliminar(auxId);
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
@@ -140,7 +141,7 @@ namespace GCR.Pages
             try
             {
                 conexion.Open();
-                string cadena = "SELECT * FROM public.modo WHERE id=" + auxId + ";";
+                string cadena = CdModo.cargarDatos(auxId);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
                 DataSet ds = new DataSet();
                 ds.Clear();

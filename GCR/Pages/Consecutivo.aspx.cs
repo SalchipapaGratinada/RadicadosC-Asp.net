@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using GCR.CadenasBd;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -61,7 +62,7 @@ namespace GCR.Pages
             try
             {
                 conexion.Open();
-                string cadena = "SELECT id as ID, consec as Consecutivo, anio as Año  FROM public.consecutivo";
+                string cadena = CdConsecutivo.mostrarDatos();
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 DataTable dt = new DataTable();

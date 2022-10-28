@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Relaciones</h5>
                         <p class="card-text">Generacion De Relaciones.</p>
-                        <a href="Radicado.aspx" class="btn btn-primary botonIndexTD">Entrar</a>
+                        <a href="Relaciones.aspx" class="btn btn-primary botonIndexTD">Entrar</a>
                     </div>
                 </div>
             </div>
