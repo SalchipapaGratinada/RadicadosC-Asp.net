@@ -26,5 +26,11 @@ namespace GCR.CadenasBd
             return cd;
         }
 
+        public static string insertar(string consec, string anio)
+        {
+            string cd = "INSERT INTO consecutivo(consec, anio ) values('" + consec + "', '" + anio + "');";
+            return cd;
+        }
+
     }
 }
