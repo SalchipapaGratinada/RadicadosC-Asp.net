@@ -63,6 +63,13 @@ namespace GCR.CadenasBd
             string cd = "INSERT INTO detalletdm(id_tipodocumental, id_modo, id_consecutivo, fecha) values("+idTd+", "+idM+", "+idCons+", '"+fecha+"');";
             return cd;
         }
+        public static string eliminar(int idTd, int idM)
+        {
+            string cd = "DELETE FROM detalletdm WHERE id_tipodocumental = "+idTd+" AND id_modo = "+idM+" ";
+            return cd;
+        }
+
+        
 
 
     }

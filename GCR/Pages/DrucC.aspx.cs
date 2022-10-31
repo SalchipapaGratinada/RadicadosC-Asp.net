@@ -49,7 +49,8 @@ namespace GCR.Pages
         {
             string consec = tbConsecutivo.Text;
             string anio = tbAnio.Text;
-            if (validarCampos(consec) || validarCampos(anio))
+            string referencia = tbReferencia.Text;
+            if (validarCampos(consec) || validarCampos(anio) || validarCampos(referencia))
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Hay Campos Vacios');", true);
             }
@@ -57,7 +58,7 @@ namespace GCR.Pages
             {
                 try
                 {
-                    string cadena = CdConsecutivo.actualizar(consec, anio, auxId);
+                    string cadena = CdConsecutivo.actualizar(consec, anio, referencia, auxId);
                     NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                     conexion.Open();
                     cmd.ExecuteNonQuery();
@@ -92,6 +93,7 @@ namespace GCR.Pages
                 DataRow row = dt.Rows[0];
                 tbConsecutivo.Text = row[1].ToString();
                 tbAnio.Text = row[2].ToString();
+                tbReferencia.Text = row[3].ToString();
                 conexion.Close();
             }
             catch (Exception ex)
@@ -114,6 +116,7 @@ namespace GCR.Pages
         {
             tbConsecutivo.Enabled = false;
             tbAnio.Enabled = false;
+            tbReferencia.Enabled = false;
         }
 
 

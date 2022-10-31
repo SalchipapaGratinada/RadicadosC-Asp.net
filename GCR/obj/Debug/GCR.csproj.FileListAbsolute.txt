@@ -1,3 +1,5 @@
+C:\Users\DELL\source\repos\GCR\GCR\obj\Debug\GCR.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\GCR\GCR\obj\Debug\GCR.csproj.CoreCompileInputs.cache
 C:\Users\DELL\source\repos\GCR\GCR\bin\GCR.dll.config
 C:\Users\DELL\source\repos\GCR\GCR\bin\GCR.dll
 C:\Users\DELL\source\repos\GCR\GCR\bin\GCR.pdb
@@ -80,8 +82,6 @@ C:\Users\DELL\source\repos\GCR\GCR\bin\System.Threading.Channels.xml
 C:\Users\DELL\source\repos\GCR\GCR\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\DELL\source\repos\GCR\GCR\bin\System.ValueTuple.xml
 C:\Users\DELL\source\repos\GCR\GCR\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\DELL\source\repos\GCR\GCR\obj\Debug\GCR.csproj.AssemblyReference.cache
-C:\Users\DELL\source\repos\GCR\GCR\obj\Debug\GCR.csproj.CoreCompileInputs.cache
 C:\Users\DELL\source\repos\GCR\GCR\obj\Debug\GCR.csproj.CopyComplete
 C:\Users\DELL\source\repos\GCR\GCR\obj\Debug\GCR.dll
 C:\Users\DELL\source\repos\GCR\GCR\obj\Debug\GCR.pdb

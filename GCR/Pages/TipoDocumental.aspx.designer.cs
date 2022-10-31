@@ -24,6 +24,15 @@ namespace GCR.Pages
         protected global::System.Web.UI.WebControls.Button btnCrearTD;
 
         /// <summary>
+        /// Control dropModo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropModo;
+
+        /// <summary>
         /// Control gvtipodocumental.
         /// </summary>
         /// <remarks>

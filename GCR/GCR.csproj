@@ -110,7 +110,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\toastr.css" />
+    <Content Include="content\toastr.min.css" />
     <Content Include="Estilos\Estyle.css" />
+    <Content Include="JavaScript\JavaScript.js" />
     <Content Include="Pages\Consecutivo.aspx" />
     <Content Include="Pages\DrucC.aspx" />
     <Content Include="Pages\DrucM.aspx" />
@@ -121,6 +124,13 @@
     <Content Include="Pages\Radicado.aspx" />
     <Content Include="Pages\Relaciones.aspx" />
     <Content Include="Pages\TipoDocumental.aspx" />
+    <Content Include="content\toastr.scss" />
+    <Content Include="content\toastr.less" />
+    <None Include="Scripts\jquery-1.6.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.3.js" />
+    <Content Include="Scripts\jquery-1.6.3.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,9 @@
     Druc TD
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <script src="../JavaScript/JavaScript.js"></script>
+    <link href="../content/toastr.css" rel="stylesheet" />
+    <script src="../Scripts/toastr.js"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
 
@@ -30,6 +33,6 @@
             <asp:Button runat="server" CssClass="btn btn-dark" ID="btnAtras" Text="Volver" Visible="True" OnClick="btnAtras_Click"/>
         </div>
     </form>
-
+    
 
 </asp:Content>

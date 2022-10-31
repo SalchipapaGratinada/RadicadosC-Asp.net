@@ -71,9 +71,12 @@ namespace GCR.Pages
             {
                 if (validarDuplicadoRelaciones())
                 {
-                    int idConsec = crearConsecutivoAutomatico();
+                    string nombreTd = dropTipoDocumental.SelectedItem.Text;
+                    string nombreM = dropModo.SelectedItem.Text;
+                    string referencia = "[" + nombreTd + " - " + nombreM + "]";
+                    int idConsec = crearConsecutivoAutomatico(referencia);
                     int idTd = Convert.ToInt32(dropTipoDocumental.SelectedValue.ToString());
-                    int idM = Convert.ToInt32(dropModo.SelectedValue.ToLower());
+                    int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());
                     DateTime dt = DateTime.Now;
                     string fecha = dt.ToString("dd-MM-yyyy");
                     string cadena = CdRelaciones.insertar(idTd, idM, idConsec, fecha);
@@ -271,14 +274,14 @@ namespace GCR.Pages
         }
 
 
-        protected int crearConsecutivoAutomatico()
+        protected int crearConsecutivoAutomatico(string referencia)
         {
             string consec = "0001";
             DateTime dt = DateTime.Now;
             string anio = dt.ToString("yyyy");
             try
             {
-                string cadena = CdConsecutivo.insertar(consec, anio);
+                string cadena = CdConsecutivo.insertar(consec, anio, referencia);
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
