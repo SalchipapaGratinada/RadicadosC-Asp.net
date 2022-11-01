@@ -279,9 +279,10 @@ namespace GCR.Pages
             string consec = "0001";
             DateTime dt = DateTime.Now;
             string anio = dt.ToString("yyyy");
+            string fechaHora = dt.ToString("MM-dd-yyyy-HH:mm:ss");
             try
             {
-                string cadena = CdConsecutivo.insertar(consec, anio, referencia);
+                string cadena = CdConsecutivo.insertar(consec, anio, referencia, fechaHora);
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 conexion.Open();
                 cmd.ExecuteNonQuery();

@@ -44,15 +44,13 @@ namespace GCR.Pages
                 }
                 else
                 {
-                    string script = "alert('Error: PassWord Incorrecta ');";
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                    msjPasswordIncorrecta();
                 }
                              
             }
             else
             {
-                string script = "alert('Error: Campo PassWord Vacio ');";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                msjCampoVacio();
             }
            
         }
@@ -104,6 +102,18 @@ namespace GCR.Pages
                 return true;
             }
         }
+
+        protected void msjCampoVacio()
+        {
+            string script = string.Format("alertaCampoVacioPw();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaCampoVacioPw", script, true);
+        }
+        protected void msjPasswordIncorrecta()
+        {
+            string script = string.Format("alertaPasswordIncorrecta();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaPasswordIncorrecta", script, true);
+        }
+
 
     }
 }

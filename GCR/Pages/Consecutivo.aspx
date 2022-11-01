@@ -3,6 +3,9 @@
     Informacion Consecutivo - Año
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <script src="../JavaScript/JavaScript.js"></script>
+    <script src="../Scripts/toastr.js"></script>
+    <link href="../content/toastr.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
     <form runat="server">

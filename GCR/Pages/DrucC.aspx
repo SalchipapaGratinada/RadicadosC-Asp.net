@@ -20,7 +20,7 @@
                 <asp:TextBox MaxLength="4" runat="server" CssClass="form-control" ID="tbAnio"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label class="form-label">Año</label>
+                <label class="form-label">Referencia</label>
                 <asp:TextBox runat="server" CssClass="form-control" ID="tbReferencia"></asp:TextBox>
             </div>
             <asp:Button runat="server" CssClass="btn btn-primary" ID="btnAcualizar" Text="Modificar" Visible="false" OnClick="btnAcualizar_Click" />

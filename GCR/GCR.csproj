@@ -136,8 +136,10 @@
   <ItemGroup>
     <Compile Include="CadenasBd\CdConsecutivo.cs" />
     <Compile Include="CadenasBd\CdModo.cs" />
+    <Compile Include="CadenasBd\CdRadicados.cs" />
     <Compile Include="CadenasBd\CdRelaciones.cs" />
     <Compile Include="CadenasBd\CdTipoDocumental.cs" />
+    <Compile Include="JavaScript\Alertas.cs" />
     <Compile Include="MP.Master.cs">
       <DependentUpon>MP.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

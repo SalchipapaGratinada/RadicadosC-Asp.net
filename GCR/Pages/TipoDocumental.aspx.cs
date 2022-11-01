@@ -23,7 +23,7 @@ namespace GCR.Pages
             {
                 cargarDatos();
                 cargarDropModo();
-               
+                
             }
             
         }
@@ -109,9 +109,8 @@ namespace GCR.Pages
                     conexion.Open();
                     cmd.ExecuteNonQuery();
                     conexion.Close();
-                    string script = string.Format("alertaModoAgregado();");
-                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaModoAgregado", script, true);
-                    Response.Redirect("TipoDocumental.aspx");
+                    msjModoAgregado();
+                    
                 }
                 else
                 {
@@ -138,8 +137,7 @@ namespace GCR.Pages
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                
-                Response.Redirect("TipoDocumental.aspx");
+                msjModoretirado();
 
             }
         }
@@ -160,7 +158,7 @@ namespace GCR.Pages
                 dropModo.DataTextField = "nombre";
                 dropModo.DataValueField = "id";
                 dropModo.DataBind();
-                dropModo.Items.Insert(0, new ListItem("<Modos>", "0"));
+                dropModo.Items.Insert(0, new ListItem("Modos", "0"));
                 conexion.Close();
             }
             catch (Exception ex)
@@ -177,9 +175,7 @@ namespace GCR.Pages
         {
             if (dropModo.SelectedIndex == 0)
             {
-                string ex = "Seleccione Un Modo";
-                string script = "alert('Warning: " + ex + "');";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                msjComboModoVacio();
                 return false;
             }
             else
@@ -211,9 +207,7 @@ namespace GCR.Pages
                 }
                 else
                 {
-                    string ex = "Este Tipo Documental Ya Tiene Agregado Ese Modo...";
-                    string script = "alert('Error: " + ex + "');";
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                    msjRelacionExiste();
                     conexion.Close();
                     return false;
                 }
@@ -238,13 +232,15 @@ namespace GCR.Pages
             string consec = "0001";
             DateTime dt = DateTime.Now;
             string anio = dt.ToString("yyyy");
+            string fechaHora = dt.ToString("MM-dd-yyyy-HH:mm:ss");
             try
             {
-                string cadena = CdConsecutivo.insertar(consec, anio, referencia);
+                string cadena = CdConsecutivo.insertar(consec, anio, referencia, fechaHora);
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
+                msjConsecutivoCreado();
                 int ultConsec = ultimoConsec();
                 return ultConsec;
             }
@@ -281,6 +277,37 @@ namespace GCR.Pages
 
         }
 
+        protected void msjModoAgregado()
+        {
+            string script = string.Format("alertaModoAgregado();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaModoAgregado", script, true);
+        }
+        protected void msjModoretirado()
+        {
+            string script = string.Format("alertaModoRetirado();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaModoRetirado", script, true);
+        }
+        protected void msjRelacionExiste()
+        {
+            string script = string.Format("alertaRelacionExiste();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaRelacionExiste", script, true);
+        }
+        protected void msjConsecutivoCreado()
+        {
+            string script = string.Format("alertaConsecutivoCreado();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaConsecutivoCreado", script, true);
+        }
+        protected void msjComboModoVacio()
+        {
+            string script = string.Format("alertaComboModoVacio();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaComboModoVacio", script, true);
+        }
 
+        protected void gvtipodocumental_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            //_ = new Button();
+            //Button bt = (Button)e.Row.FindControl("btnmodo");
+            //bt.Text = "Hola";
+        }
     }
 }

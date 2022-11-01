@@ -25,7 +25,7 @@
             <div class="table small">
                 <asp:DropDownList ID="dropModo" runat="server" Visible="true" CssClass="drupSelecionModo btn btn-info" OnSelectedIndexChanged="dropModo_SelectedIndexChanged">
                 </asp:DropDownList>
-                <asp:GridView runat="server" ID="gvtipodocumental" class="table table-borderless table-hover">
+                <asp:GridView runat="server" ID="gvtipodocumental" class="table table-borderless table-hover" OnRowDataBound="gvtipodocumental_RowDataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="Opciones">
                             <ItemTemplate runat="server">

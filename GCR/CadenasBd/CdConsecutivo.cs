@@ -10,7 +10,7 @@ namespace GCR.CadenasBd
 
         public static string mostrarDatos()
         {
-            string cd = "SELECT id as ID, consec as Consecutivo, anio as Año, referencia  FROM public.consecutivo";
+            string cd = "SELECT id as ID, consec as Consecutivo, anio as Año, referencia, fechahora as Fecha FROM public.consecutivo";
             return cd;
         }
 
@@ -26,9 +26,9 @@ namespace GCR.CadenasBd
             return cd;
         }
 
-        public static string insertar(string consec, string anio, string refer)
+        public static string insertar(string consec, string anio, string refer, string fechaHora)
         {
-            string cd = "INSERT INTO consecutivo(consec, anio, referencia) values('" + consec + "', '" + anio + "', '" + refer + "');";
+            string cd = "INSERT INTO consecutivo(consec, anio, referencia, fechahora) values('" + consec + "', '" + anio + "', '" + refer + "', '"+fechaHora+"');";
             return cd;
         }
 
