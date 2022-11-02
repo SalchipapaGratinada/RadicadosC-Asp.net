@@ -19,16 +19,18 @@
                 <div class="cTextoKeyCons">
                     <asp:TextBox runat="server" TextMode="Password" CssClass="form-control" ID="tbkey"></asp:TextBox>
                 </div>
-                <asp:GridView runat="server" ID="gvconsecutivo" class="table table-borderless table-hover">
-                    <Columns>
-                        <asp:TemplateField HeaderText="Opciones">
-                            <ItemTemplate>
-                                <asp:Button runat="server" ID="btnLeer" Text="Ver" class="btn btn-secondary form-control-sm" OnClick="btnLeer_Click" />
-                                <asp:Button runat="server" ID="btnActualizar" Text="Modifiar" class="btn btn-warning form-control-sm" OnClick="btnActualizar_Click" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <div style="overflow:auto; height:400px">
+                    <asp:GridView runat="server" ID="gvconsecutivo" class="table table-borderless table-hover">
+                        <Columns>
+                            <asp:TemplateField HeaderText="Opciones">
+                                <ItemTemplate>
+                                    <asp:Button runat="server" ID="btnLeer" Text="Ver" class="btn btn-secondary form-control-sm" OnClick="btnLeer_Click" />
+                                    <asp:Button runat="server" ID="btnActualizar" Text="Modifiar" class="btn btn-warning form-control-sm" OnClick="btnActualizar_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
             </div>
         </div>
     </form>
