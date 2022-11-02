@@ -33,6 +33,16 @@
             <asp:Button runat="server" CssClass="btn btn-dark" ID="btnAtras" Text="Volver" Visible="True" OnClick="btnAtras_Click"/>
         </div>
     </form>
-    
+
+    <div class="infoFormato">
+        <asp:Label runat="server" CssClass="h5" ID="lblInfo">Reglas Formato:</asp:Label>
+        <ul class="list-group list-group-numbered" >
+            <li class="list-group-item" style="font-weight:bold">Los TD, CON, M Van Dentro De [] Ejm: [TD] o [M]</li>
+            <li class="list-group-item" style="font-weight:bold">El Numero Consecutivo Va Separao Por coma.  Ejm: [CON, 0000]</li>
+            <li class="list-group-item" style="font-weight:bold">Puede utilizar guiones ó Puntos </li>
+            <li class="list-group-item" style="font-weight:bold">Verificar Formato Antes De Relacionar Modos.</li>
+        </ul>
+    </div>
+
 
 </asp:Content>

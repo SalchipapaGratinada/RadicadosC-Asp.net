@@ -86,28 +86,36 @@ namespace GCR.Pages
             string codigo = tbCodigo.Text;
             string nombre = tbNombre.Text;
             string formato = tbFormato.Text;
-            if (validarCampos(codigo) || validarCampos(nombre) || validarCampos(formato))
+            formato = formato.ToUpper();
+            if (tbFormato.Text.Contains(" "))
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(),"alert", "alert('Hay Campos Vacios');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No Se aceptan Espacios En Blanco En El formato');", true);
             }
             else
             {
-                try
+                if (validarCampos(codigo) || validarCampos(nombre) || validarCampos(formato))
                 {
-                    string cadena = CdTipoDocumental.insertar(codigo, nombre, formato);
-                    NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
-                    conexion.Open();
-                    cmd.ExecuteNonQuery();
-                    conexion.Close();
-                    Response.Redirect("TipoDocumental.aspx");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Hay Campos Vacios');", true);
                 }
-                catch (Exception ex)
+                else
                 {
-                    string script = "alert('Error: " + ex + "');";
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-                    throw;
+                    try
+                    {
+                        string cadena = CdTipoDocumental.insertar(codigo, nombre, formato);
+                        NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+                        conexion.Open();
+                        cmd.ExecuteNonQuery();
+                        conexion.Close();
+                        Response.Redirect("TipoDocumental.aspx");
+                    }
+                    catch (Exception ex)
+                    {
+                        string script = "alert('Error: " + ex + "');";
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                        throw;
+                    }
+
                 }
-                
             }
             
         }

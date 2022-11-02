@@ -57,6 +57,19 @@
     margin-bottom: 1.2rem
 }
 
+.infoFormato {
+    margin-top: -8.2rem;
+    margin-left: 68.8rem;
+    width: 250px;
+    height: 325px;
+    background-color:floralwhite;
+    border: solid 1px black;
+    border-top-right-radius: 5%;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
 
 
 

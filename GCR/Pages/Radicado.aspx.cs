@@ -1,4 +1,5 @@
 ﻿using GCR.CadenasBd;
+using Microsoft.SqlServer.Server;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -28,16 +29,40 @@ namespace GCR.Pages
         protected void btnGenerar_Click(object sender, EventArgs e)
         {
             int idTd = Convert.ToInt32(dropTipoDocumental.SelectedValue.ToString());
-            
             if (idTd != 0)
             {
                 int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());
                 if (idM != 0)
                 {
-                    this.lblInfoRadicado.Text = "Aqui Va El Radicado";
-                    this.dropTipoDocumental.Enabled = false;
-                    this.dropModo.Enabled = false;
-                    msjRadicadoGenerado();
+                    int idConsec = traerIdConsecutivo(idTd, idM);
+                    string sConsecutivo = traerConsecutivo(idConsec);
+                    string sConsecAumentado = formateandoConsecutivo(sConsecutivo);
+                    try
+                    {
+                        string cadena = CdRadicados.actualizarConsecutivo(sConsecAumentado, idConsec);
+                        NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+                        conexion.Open();
+                        cmd.ExecuteNonQuery();
+                        conexion.Close();
+                        //aqui necesitamos mostrar el radicado con el formato
+                        string formato = sacarFormatoParaRadicado(idTd);
+                        string cadenaConsecutivo = formateandoFormatoTd(formato);
+                        string tipoDoc = dropTipoDocumental.SelectedItem.Text;
+                        string modo = dropModo.SelectedItem.Text;
+                        formato = formato.Replace("[TP]", tipoDoc);
+                        formato = formato.Replace("[M]", modo);
+                        formato = formato.Replace("[CON,"+cadenaConsecutivo+"]", sConsecAumentado);
+                        string radicado = formato;
+                        msjRadicadoGenerado();
+                        this.lblInfoRadicado.Text = "Numero De Radicado: "+radicado; 
+                        this.dropTipoDocumental.Enabled = false;
+                        this.dropModo.Enabled = false;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
                 }
                 else
                 {
@@ -49,6 +74,62 @@ namespace GCR.Pages
                 msjtdVacio();
             }
 
+        }
+
+        public int traerIdConsecutivo(int idTd, int idM)
+        {
+            try
+            {
+                conexion.Open();
+                string cadena = CdRadicados.traerIdConsecutivoRelacion(idTd, idM);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                int idC = Int32.Parse(row[0].ToString());
+                conexion.Close();
+                return idC;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string traerConsecutivo (int idConsec)
+        {
+            try
+            {
+                conexion.Open();
+                string cadena = CdRadicados.traerConsecutivo(idConsec);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                string cadenaConsec = row[0].ToString();
+                conexion.Close();
+                return cadenaConsec;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string formateandoConsecutivo(string cadenaConsec)
+        {
+            int consec = Int32.Parse(cadenaConsec);
+            consec = consec + 1;
+            int aux = cadenaConsec.Length - consec.ToString().Length;
+            string cadenaConsecNueva = cadenaConsec.Substring(0,aux);
+            cadenaConsecNueva = cadenaConsecNueva+consec.ToString();
+            return cadenaConsecNueva;
         }
 
         protected void btnAtras_Click(object sender, EventArgs e)
@@ -93,6 +174,87 @@ namespace GCR.Pages
                 dropModo.Items.Clear();
             }    
         }
+
+        public string sacarFormatoParaRadicado(int idTd)
+        {
+            try
+            {
+                conexion.Open();
+                string cadena = CdTipoDocumental.traerFormato(idTd);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                string formato = row[0].ToString();
+                conexion.Close();
+                return formato;
+
+            }
+            catch (Exception ex)
+            {
+                string script = "alert('Error: " + ex + "');";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                throw;
+            }
+        }
+
+        public string formateandoFormatoTd(string formato)
+        {
+            formato = formato.ToUpper();
+            int limite = formato.Length - 1;
+            int posicion = -1;
+            int numeroDeCeros = 0;
+            if (formato.Contains("CON"))
+            {
+                for (int i = 0; i < formato.Length; i++)
+                {
+                    char act = formato[i];
+                    if (act.Equals('C'))
+                    {
+                        if (i + 1 <= limite)
+                        {
+                            char act1 = formato[i + 1];
+                            if (act1.Equals('O'))
+                            {
+                                if (i + 2 <= limite)
+                                {
+                                    char act2 = formato[i + 2];
+                                    if (act2.Equals('N'))
+                                    {
+                                        posicion = (i + 2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (int i = posicion; i < formato.Length; i++)
+                {
+                    char act = formato[i];
+                    if (act.Equals('0'))
+                    {
+                        numeroDeCeros = numeroDeCeros + 1;
+                    }
+                }
+                if (numeroDeCeros != 0)
+                {
+                    string cadenaDeCeros = formato.Substring((posicion + 2), numeroDeCeros);
+                    return cadenaDeCeros;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
 
         public void cargarComboM(int idTd)
         {

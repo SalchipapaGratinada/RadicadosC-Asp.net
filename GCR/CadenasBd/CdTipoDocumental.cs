@@ -39,5 +39,11 @@ namespace GCR.CadenasBd
             return cd;
         }
 
+        public static string traerFormato(int id)
+        {
+            string cd = "SELECT formato FROM tipodocumental WHERE id = " + id + ";";
+            return cd;
+        }
+
     }
 }

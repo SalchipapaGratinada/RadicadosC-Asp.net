@@ -89,17 +89,19 @@ namespace GCR.Pages
         {
             string nombreTd;
             string id;
+            int idTD;
             Button btnConsultar = (Button)sender;
             GridViewRow selecionF = (GridViewRow)btnConsultar.NamingContainer;
             string nombreM = dropModo.SelectedItem.Text;
             nombreTd = selecionF.Cells[3].Text;
+            idTD  = Int32.Parse(selecionF.Cells[1].Text);
             string referencia = "[" + nombreTd + " - " + nombreM + "]";
             id = selecionF.Cells[1].Text;
             if (validarSelect())
             {
                 if (validarDuplicadoRelaciones(nombreTd))
                 {
-                    int idConsec = crearConsecutivoAutomatico(referencia);
+                    int idConsec = crearConsecutivoAutomatico(referencia, idTD);
                     int idTd = Convert.ToInt32(id);
                     int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());       
                     DateTime dt = DateTime.Now;
@@ -227,9 +229,9 @@ namespace GCR.Pages
 
         }
 
-        protected int crearConsecutivoAutomatico(string referencia)
+        protected int crearConsecutivoAutomatico(string referencia, int idTD)
         {
-            string consec = "0001";
+            string consec = consecutivoBase(idTD);
             DateTime dt = DateTime.Now;
             string anio = dt.ToString("yyyy");
             string fechaHora = dt.ToString("MM-dd-yyyy-HH:mm:ss");
@@ -251,6 +253,88 @@ namespace GCR.Pages
                 throw;
             }
         }
+
+
+        public string consecutivoBase(int idTd)
+        {
+            try
+            {
+                conexion.Open();
+                string cadena = CdTipoDocumental.traerFormato(idTd);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                string formato = row[0].ToString();
+                string cadenaConsecutivo = formateandoFormatoTd(formato);
+                conexion.Close();
+                return cadenaConsecutivo;
+                
+            }
+            catch (Exception ex)
+            {
+                string script = "alert('Error: " + ex + "');";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                throw;
+            }
+        }
+
+        public string formateandoFormatoTd(string formato)
+        {
+            formato = formato.ToUpper();
+            int limite = formato.Length - 1;
+            int posicion = -1;
+            int numeroDeCeros = 0;
+            if (formato.Contains("CON"))
+            {
+                for (int i = 0; i < formato.Length; i++)
+                {
+                    char act = formato[i];
+                    if (act.Equals('C'))
+                    {
+                        if (i+1 <= limite)
+                        {
+                            char act1 = formato[i + 1];
+                            if (act1.Equals('O'))
+                            {
+                                if (i+2 <= limite)
+                                {
+                                    char act2 = formato[i + 2];
+                                    if (act2.Equals('N'))
+                                    {
+                                        posicion = (i+2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (int i = posicion; i < formato.Length; i++)
+                {
+                    char act = formato[i];
+                    if (act.Equals('0'))
+                    {
+                        numeroDeCeros = numeroDeCeros + 1;
+                    }
+                }
+                if (numeroDeCeros != 0)
+                {
+                    string cadenaDeCeros = formato.Substring((posicion + 2), numeroDeCeros);
+                    return cadenaDeCeros;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
+
 
         protected int ultimoConsec()
         {
@@ -305,9 +389,7 @@ namespace GCR.Pages
 
         protected void gvtipodocumental_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //_ = new Button();
-            //Button bt = (Button)e.Row.FindControl("btnmodo");
-            //bt.Text = "Hola";
+
         }
     }
 }

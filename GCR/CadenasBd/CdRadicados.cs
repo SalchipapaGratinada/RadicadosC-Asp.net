@@ -22,6 +22,26 @@ namespace GCR.CadenasBd
             return cd;
         }
 
+        public static string traerIdConsecutivoRelacion(int idTd, int idM)
+        {
+            string cd = "SELECT dtm.id_consecutivo FROM detalletdm AS dtm WHERE dtm.id_tipodocumental = "+idTd+" AND dtm.id_modo = "+idM+"; ";
+            return cd;
+        }
+        public static string traerConsecutivo(int idConsec)
+        {
+            string cd = "SELECT consec FROM consecutivo WHERE id = "+idConsec+";";
+            return cd;
+        }
+
+        public static string actualizarConsecutivo(string nuevoConsec, int idConsec)
+        {
+            string cd = "UPDATE consecutivo set consec = '"+nuevoConsec+"' WHERE id = "+idConsec+";";
+            return cd;
+        }
+
+
+        
+
 
     }
 }
