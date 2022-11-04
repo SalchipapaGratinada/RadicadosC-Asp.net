@@ -16,7 +16,7 @@
     <form runat="server">
         <asp:ScriptManager ID="asm" runat="server" />
         <br />
-        <div class="mx-auto" style="width: 300px">
+        <div class="mx-auto" style="width: 300px; margin-bottom:-0.8rem">
             <h2>Lista Tipos Documentales</h2>
         </div>
         <div class="container">
