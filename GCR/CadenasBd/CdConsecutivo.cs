@@ -31,6 +31,12 @@ namespace GCR.CadenasBd
             string cd = "INSERT INTO consecutivo(consec, anio, referencia, fechahora) values('" + consec + "', '" + anio + "', '" + refer + "', '"+fechaHora+"');";
             return cd;
         }
+        public static string cargarDropConsec()
+        {
+            string cd = "SELECT id, consec FROM consecutivo ORDER BY id;";
+            return cd;
+        }
+
 
     }
 }

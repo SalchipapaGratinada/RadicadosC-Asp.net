@@ -23,7 +23,7 @@ namespace GCR.Pages
             {
                 cargarDatos();
                 cargarDropModo();
-                
+                cargarDropConsecutivo();
             }
             
         }
@@ -94,16 +94,20 @@ namespace GCR.Pages
             GridViewRow selecionF = (GridViewRow)btnConsultar.NamingContainer;
             string nombreM = dropModo.SelectedItem.Text;
             nombreTd = selecionF.Cells[3].Text;
-            idTD  = Int32.Parse(selecionF.Cells[1].Text);
+            idTD = Int32.Parse(selecionF.Cells[1].Text);
             string referencia = "[" + nombreTd + " - " + nombreM + "]";
             id = selecionF.Cells[1].Text;
             if (validarSelect())
             {
                 if (validarDuplicadoRelaciones(nombreTd))
                 {
-                    int idConsec = crearConsecutivoAutomatico(referencia, idTD);
+                    int idConsec = Convert.ToInt32(dropConsec.SelectedValue.ToString());
+                    if (idConsec == 0)
+                    {
+                        idConsec = crearConsecutivoAutomatico(referencia, idTD);
+                    }
                     int idTd = Convert.ToInt32(id);
-                    int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());       
+                    int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());
                     DateTime dt = DateTime.Now;
                     string fecha = dt.ToString("dd-MM-yyyy");
                     string cadena = CdRelaciones.insertar(idTd, idM, idConsec, fecha);
@@ -112,16 +116,15 @@ namespace GCR.Pages
                     cmd.ExecuteNonQuery();
                     conexion.Close();
                     msjModoAgregado();
-                    
+                    cargarDropConsecutivo();
+                    cargarDropModo();
                 }
                 else
                 {
                     dropModo.SelectedIndex = 0;
                 }
 
-            }      
-            
-           
+            }
         }
 
         protected void btnmodoe_Click(object sender, EventArgs e)
@@ -172,6 +175,36 @@ namespace GCR.Pages
 
 
         }
+
+        protected void cargarDropConsecutivo()
+        {
+
+            try
+            {
+                string cadena = CdConsecutivo.cargarDropConsec();
+                NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+                conexion.Open();
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                dropConsec.DataSource = ds;
+                dropConsec.DataTextField = "consec";
+                dropConsec.DataValueField = "id";
+                dropConsec.DataBind();
+                dropConsec.Items.Insert(0, new ListItem("Consec Nuevo", "0"));
+                conexion.Close();
+            }
+            catch (Exception ex)
+            {
+                string script = "alert('Error: " + ex + "');";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                throw;
+            }
+
+
+        }
+
+
 
         protected Boolean validarSelect()
         {
@@ -390,6 +423,11 @@ namespace GCR.Pages
         protected void gvtipodocumental_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
+        }
+
+        protected void btnConsec_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

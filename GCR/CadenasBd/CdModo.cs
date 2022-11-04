@@ -37,6 +37,13 @@ namespace GCR.CadenasBd
             return cd;
         }
 
+        public static string traerCodigoModo(string nombre)
+        {
+            string cd = "SELECT codigo FROM modo WHERE nombre = '"+nombre+"'";
+            return cd;
+        }
+
+        
 
     }
 }

@@ -36,6 +36,17 @@ function alertaRadicadoGenerado() {
     toastr.success("Numero De Radicado Generado")
 }
 
+function alertaCampoVacio() {
+    toastr.warning("Hay Campos Vacios")
+}
+
+function alertaEspacios() {
+    toastr.info("El Formato No Puede Contener Espacios En Blanco")
+}
+function alertaPalabrasReservadas() {
+    toastr.warning("Faltan Palabras reservadas En Formato.")
+}
+
 
 
 

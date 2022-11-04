@@ -87,36 +87,44 @@ namespace GCR.Pages
             string nombre = tbNombre.Text;
             string formato = tbFormato.Text;
             formato = formato.ToUpper();
-            if (tbFormato.Text.Contains(" "))
+            if (tbFormato.Text.Contains("[TP]") && tbFormato.Text.Contains("[M]") && tbFormato.Text.Contains("CON"))
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No Se aceptan Espacios En Blanco En El formato');", true);
-            }
-            else
-            {
-                if (validarCampos(codigo) || validarCampos(nombre) || validarCampos(formato))
+                if (tbFormato.Text.Contains(" "))
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Hay Campos Vacios');", true);
+                    msjEspacios();
                 }
                 else
                 {
-                    try
+                    if (validarCampos(codigo) || validarCampos(nombre) || validarCampos(formato))
                     {
-                        string cadena = CdTipoDocumental.insertar(codigo, nombre, formato);
-                        NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
-                        conexion.Open();
-                        cmd.ExecuteNonQuery();
-                        conexion.Close();
-                        Response.Redirect("TipoDocumental.aspx");
+                        msjCampoVacio();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        string script = "alert('Error: " + ex + "');";
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-                        throw;
-                    }
+                        try
+                        {
+                            string cadena = CdTipoDocumental.insertar(codigo, nombre, formato);
+                            NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+                            conexion.Open();
+                            cmd.ExecuteNonQuery();
+                            conexion.Close();
+                            Response.Redirect("TipoDocumental.aspx");
+                        }
+                        catch (Exception ex)
+                        {
+                            string script = "alert('Error: " + ex + "');";
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                            throw;
+                        }
 
+                    }
                 }
             }
+            else
+            {
+                msjPalabrasReservadas();
+            }
+           
             
         }
 
@@ -152,7 +160,7 @@ namespace GCR.Pages
             string formato = tbFormato.Text;
             if (validarCampos(codigo) || validarCampos(nombre) || validarCampos(formato))
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Hay Campos Vacios');", true);
+                msjCampoVacio();
             }
             else
             {
@@ -189,6 +197,24 @@ namespace GCR.Pages
             tbNombre.Enabled = false;
             tbFormato.Enabled = false;
         }
+
+
+        protected void msjCampoVacio()
+        {
+            string script = string.Format("alertaCampoVacio();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaCampoVacio", script, true);
+        }
+        protected void msjEspacios()
+        {
+            string script = string.Format("alertaEspacios();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaEspacios", script, true);
+        }
+        protected void msjPalabrasReservadas()
+        {
+            string script = string.Format("alertaPalabrasReservadas();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaPalabrasReservadas", script, true);
+        }
+
 
     }
 }

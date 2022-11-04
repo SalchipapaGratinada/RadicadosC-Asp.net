@@ -49,8 +49,11 @@ namespace GCR.Pages
                         string cadenaConsecutivo = formateandoFormatoTd(formato);
                         string tipoDoc = dropTipoDocumental.SelectedItem.Text;
                         string modo = dropModo.SelectedItem.Text;
+                        //Aqui se trae el codigo del modo
+                        string codigoModo = traerCodigoModo(modo);
+
                         formato = formato.Replace("[TP]", tipoDoc);
-                        formato = formato.Replace("[M]", modo);
+                        formato = formato.Replace("[M]", codigoModo);
                         formato = formato.Replace("[CON,"+cadenaConsecutivo+"]", sConsecAumentado);
                         string radicado = formato;
                         msjRadicadoGenerado();
@@ -127,9 +130,40 @@ namespace GCR.Pages
             int consec = Int32.Parse(cadenaConsec);
             consec = consec + 1;
             int aux = cadenaConsec.Length - consec.ToString().Length;
-            string cadenaConsecNueva = cadenaConsec.Substring(0,aux);
-            cadenaConsecNueva = cadenaConsecNueva+consec.ToString();
+            string cadenaConsecNueva;
+            if (aux > 0)
+            {
+                cadenaConsecNueva = cadenaConsec.Substring(0,aux);
+                cadenaConsecNueva = cadenaConsecNueva + consec.ToString();
+            }
+            else
+            {
+                cadenaConsecNueva = consec.ToString();
+            }
             return cadenaConsecNueva;
+        }
+
+
+        public string traerCodigoModo(string nombre)
+        {
+            try
+            {
+                conexion.Open();
+                string cadena = CdModo.traerCodigoModo(nombre);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                string codigoModo = row[0].ToString();
+                conexion.Close();
+                return codigoModo;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         protected void btnAtras_Click(object sender, EventArgs e)
@@ -298,9 +332,13 @@ namespace GCR.Pages
             string script = string.Format("alertaRadicadoGenerado();");
             ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaRadicadoGenerado", script, true);
         }
+        protected void msjPrueba(string mensaje)
+        {
+            string script = "alert('Error: " + mensaje + "');";
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+        }
 
 
-        
 
 
     }

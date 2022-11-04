@@ -1,5 +1,5 @@
 ﻿    <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MP.master.cs" Inherits="GCR.MP" %>
-
+    <%@ Register TagPrefix="ajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %> 
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -55,14 +55,17 @@
             </div>
         </div>
     </nav>
-    
-   
 
+
+    
+
+
+    <asp:ContentPlaceHolder ID="body" runat="server">
+    </asp:ContentPlaceHolder>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="Scripts/toastr.js"></script>
-    <asp:ContentPlaceHolder ID="body" runat="server">
+    <script src="../JavaScript/popup.js"></script>
 
-    </asp:ContentPlaceHolder>
 
 </body>
 </html>

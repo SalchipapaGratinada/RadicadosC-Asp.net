@@ -3,8 +3,8 @@
     Druc TD
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-    <script src="../JavaScript/JavaScript.js"></script>
     <link href="../content/toastr.css" rel="stylesheet" />
+    <script src="../JavaScript/JavaScript.js"></script>
     <script src="../Scripts/toastr.js"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
@@ -37,7 +37,7 @@
     <div class="infoFormato">
         <asp:Label runat="server" CssClass="h5" ID="lblInfo">Reglas Formato:</asp:Label>
         <ul class="list-group list-group-numbered" >
-            <li class="list-group-item" style="font-weight:bold">Los TD, CON, M Van Dentro De [] Ejm: [TD] o [M]</li>
+            <li class="list-group-item" style="font-weight:bold">Los TP, CON, M Van Dentro De [] Ejm: [TD] o [M]</li>
             <li class="list-group-item" style="font-weight:bold">El Numero Consecutivo Va Separao Por coma.  Ejm: [CON, 0000]</li>
             <li class="list-group-item" style="font-weight:bold">Puede utilizar guiones ó Puntos </li>
             <li class="list-group-item" style="font-weight:bold">Verificar Formato Antes De Relacionar Modos.</li>
