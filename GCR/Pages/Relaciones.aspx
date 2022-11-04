@@ -20,6 +20,10 @@
         <br />
         <div class="container">
             <div class="table small">
+                <div class="cTextoKeyCons">
+                    <asp:TextBox runat="server" CssClass="form-control" ID="tbbuscar"></asp:TextBox>
+                    <asp:Button runat="server" ID="btnBuscar" Text="Buscar" class="btn btn-success form-control-sm" OnClick="btnBuscar_Click"/>
+                </div>
                 <div style="overflow: auto; height: 400px">
                     <asp:GridView runat="server" ID="gvrelaciones" class="table table-borderless table-hover">
                         <Columns>

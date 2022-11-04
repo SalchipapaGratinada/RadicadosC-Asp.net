@@ -80,5 +80,27 @@ namespace GCR.Pages
             Console.WriteLine(id);
             Response.Redirect("~/Pages/DrucM.aspx?id=" + id + "&op=E");
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conexion.Open();
+                string cadena = CdModo.buscar(tbbuscar.Text);
+                NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gvmodo.DataSource = dt;
+                gvmodo.DataBind();
+                conexion.Close();
+            }
+            catch (Exception ex)
+            {
+                string script = "alert('Error: " + ex + "');";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                throw;
+            }
+        }
     }
 }

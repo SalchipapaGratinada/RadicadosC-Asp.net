@@ -6,8 +6,10 @@
 }
 
 .cTextoKeyCons {
+    
     width: 100px;
-    margin: 1px 1px 4px;
+    margin-top:-4rem;
+    text-align:justify-all;
 }
 
 .imgIndex {

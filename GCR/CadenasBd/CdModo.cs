@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCR.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -43,7 +44,13 @@ namespace GCR.CadenasBd
             return cd;
         }
 
-        
+        public static string buscar(string cadena)
+        {
+            string cd = "SELECT* FROM modo WHERE nombre LIKE '%"+cadena+"%'";
+            return cd;
+            
+        }
+
 
     }
 }
