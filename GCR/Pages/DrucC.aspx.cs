@@ -94,6 +94,7 @@ namespace GCR.Pages
                 tbConsecutivo.Text = row[1].ToString();
                 tbAnio.Text = row[2].ToString();
                 tbReferencia.Text = row[3].ToString();
+                tbNombre.Text = row[5].ToString();
                 conexion.Close();
             }
             catch (Exception ex)
@@ -117,6 +118,7 @@ namespace GCR.Pages
             tbConsecutivo.Enabled = false;
             tbAnio.Enabled = false;
             tbReferencia.Enabled = false;
+            tbNombre.Enabled = false;
         }
 
 

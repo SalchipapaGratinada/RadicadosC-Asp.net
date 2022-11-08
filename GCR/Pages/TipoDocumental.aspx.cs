@@ -22,8 +22,6 @@ namespace GCR.Pages
             if (!IsPostBack)
             {
                 cargarDatos();
-                cargarDropModo();
-                cargarDropConsecutivo();
             }
             
         }
@@ -78,183 +76,201 @@ namespace GCR.Pages
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
             string id;
+            string nombre;
             Button btnConsultar = (Button)sender;
             GridViewRow selecionF = (GridViewRow)btnConsultar.NamingContainer;
             id = selecionF.Cells[1].Text;
+            nombre = selecionF.Cells[3].Text;
             Console.WriteLine(id);
-            Response.Redirect("~/Pages/DrucTD.aspx?id=" + id + "&op=E");
+            Response.Redirect("~/Pages/DrucGMT.aspx?id=" + id + "&nombre="+nombre);
         }
 
-        protected void btnmodo_Click(object sender, EventArgs e)
+        //protected void btnmodo_Click(object sender, EventArgs e)
+        //{
+        //    string nombreTd;
+        //    string id;
+        //    int idTD;
+        //    Button btnConsultar = (Button)sender;
+        //    GridViewRow selecionF = (GridViewRow)btnConsultar.NamingContainer;
+        //    string nombreM = dropModo.SelectedItem.Text;
+        //    nombreTd = selecionF.Cells[3].Text;
+        //    idTD = Int32.Parse(selecionF.Cells[1].Text);
+        //    string referencia = "[" + nombreTd + " - " + nombreM + "]";
+        //    id = selecionF.Cells[1].Text;
+        //    if (validarSelect())
+        //    {
+        //        if (validarDuplicadoRelaciones(nombreTd))
+        //        {
+        //            int idConsec = Convert.ToInt32(dropConsec.SelectedValue.ToString());
+        //            if (idConsec == 0)
+        //            {
+        //                idConsec = crearConsecutivoAutomatico(referencia, idTD);
+        //            }
+        //            int idTd = Convert.ToInt32(id);
+        //            int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());
+        //            DateTime dt = DateTime.Now;
+        //            string fecha = dt.ToString("dd-MM-yyyy");
+        //            string cadena = CdRelaciones.insertar(idTd, idM, idConsec, fecha);
+        //            NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+        //            conexion.Open();
+        //            cmd.ExecuteNonQuery();
+        //            conexion.Close();
+        //            msjModoAgregado();
+        //            cargarDropConsecutivo();
+        //            cargarDropModo();
+        //        }
+        //        else
+        //        {
+        //            dropModo.SelectedIndex = 0;
+        //        }
+
+        //    }
+        //}
+
+        //protected void btnmodoe_Click(object sender, EventArgs e)
+        //{
+        //    string id;
+        //    Button btnConsultar = (Button)sender;
+        //    GridViewRow selecionF = (GridViewRow)btnConsultar.NamingContainer;
+        //    id = selecionF.Cells[1].Text;
+        //    if (validarSelect())
+        //    {
+        //        int idTd = Convert.ToInt32(id);
+        //        int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());
+        //        string cadena = CdRelaciones.eliminar(idTd, idM);
+        //        NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+        //        conexion.Open();
+        //        cmd.ExecuteNonQuery();
+        //        conexion.Close();
+        //        msjModoretirado();
+
+        //    }
+        //}
+        protected void btnConsec_Click(object sender, EventArgs e)
         {
-            string nombreTd;
+
+        }
+
+        protected void btnGestionModos_Click(object sender, EventArgs e)
+        {
             string id;
-            int idTD;
+            string nombre;
             Button btnConsultar = (Button)sender;
             GridViewRow selecionF = (GridViewRow)btnConsultar.NamingContainer;
-            string nombreM = dropModo.SelectedItem.Text;
-            nombreTd = selecionF.Cells[3].Text;
-            idTD = Int32.Parse(selecionF.Cells[1].Text);
-            string referencia = "[" + nombreTd + " - " + nombreM + "]";
             id = selecionF.Cells[1].Text;
-            if (validarSelect())
-            {
-                if (validarDuplicadoRelaciones(nombreTd))
-                {
-                    int idConsec = Convert.ToInt32(dropConsec.SelectedValue.ToString());
-                    if (idConsec == 0)
-                    {
-                        idConsec = crearConsecutivoAutomatico(referencia, idTD);
-                    }
-                    int idTd = Convert.ToInt32(id);
-                    int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());
-                    DateTime dt = DateTime.Now;
-                    string fecha = dt.ToString("dd-MM-yyyy");
-                    string cadena = CdRelaciones.insertar(idTd, idM, idConsec, fecha);
-                    NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
-                    conexion.Open();
-                    cmd.ExecuteNonQuery();
-                    conexion.Close();
-                    msjModoAgregado();
-                    cargarDropConsecutivo();
-                    cargarDropModo();
-                }
-                else
-                {
-                    dropModo.SelectedIndex = 0;
-                }
-
-            }
-        }
-
-        protected void btnmodoe_Click(object sender, EventArgs e)
-        {
-            string id;
-            Button btnConsultar = (Button)sender;
-            GridViewRow selecionF = (GridViewRow)btnConsultar.NamingContainer;
-            id = selecionF.Cells[1].Text;
-            if (validarSelect())
-            {
-                int idTd = Convert.ToInt32(id);
-                int idM = Convert.ToInt32(dropModo.SelectedValue.ToString());
-                string cadena = CdRelaciones.eliminar(idTd, idM);
-                NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
-                conexion.Open();
-                cmd.ExecuteNonQuery();
-                conexion.Close();
-                msjModoretirado();
-
-            }
+            nombre = selecionF.Cells[3].Text;
+            Console.WriteLine(id);
+            Response.Redirect("~/Pages/DrucGMT.aspx?id=" + id + "&nombre=" + nombre);
         }
 
 
-        protected void cargarDropModo()
-        {
+        //protected void cargarDropModo()
+        //{
 
-            try
-            {
-                string cadena = CdRelaciones.cargarDropM();
-                NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
-                conexion.Open();
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dropModo.DataSource = ds;
-                dropModo.DataTextField = "nombre";
-                dropModo.DataValueField = "id";
-                dropModo.DataBind();
-                dropModo.Items.Insert(0, new ListItem("Modos", "0"));
-                conexion.Close();
-            }
-            catch (Exception ex)
-            {
-                string script = "alert('Error: " + ex + "');";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-                throw;
-            }
-
-
-        }
-
-        protected void cargarDropConsecutivo()
-        {
-
-            try
-            {
-                string cadena = CdConsecutivo.cargarDropConsec();
-                NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
-                conexion.Open();
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dropConsec.DataSource = ds;
-                dropConsec.DataTextField = "consec";
-                dropConsec.DataValueField = "id";
-                dropConsec.DataBind();
-                dropConsec.Items.Insert(0, new ListItem("Consec Nuevo", "0"));
-                conexion.Close();
-            }
-            catch (Exception ex)
-            {
-                string script = "alert('Error: " + ex + "');";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-                throw;
-            }
+        //    try
+        //    {
+        //        string cadena = CdRelaciones.cargarDropM();
+        //        NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+        //        conexion.Open();
+        //        NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+        //        DataSet ds = new DataSet();
+        //        da.Fill(ds);
+        //        dropModo.DataSource = ds;
+        //        dropModo.DataTextField = "nombre";
+        //        dropModo.DataValueField = "id";
+        //        dropModo.DataBind();
+        //        dropModo.Items.Insert(0, new ListItem("Modos", "0"));
+        //        conexion.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string script = "alert('Error: " + ex + "');";
+        //        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+        //        throw;
+        //    }
 
 
-        }
+        //}
+
+        //protected void cargarDropConsecutivo()
+        //{
+
+        //    try
+        //    {
+        //        string cadena = CdConsecutivo.cargarDropConsec();
+        //        NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+        //        conexion.Open();
+        //        NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+        //        DataSet ds = new DataSet();
+        //        da.Fill(ds);
+        //        dropConsec.DataSource = ds;
+        //        dropConsec.DataTextField = "nombre";
+        //        dropConsec.DataValueField = "id";
+        //        dropConsec.DataBind();
+        //        dropConsec.Items.Insert(0, new ListItem("Consec Nuevo", "0"));
+        //        conexion.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string script = "alert('Error: " + ex + "');";
+        //        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+        //        throw;
+        //    }
+
+
+        //}
 
 
 
-        protected Boolean validarSelect()
-        {
-            if (dropModo.SelectedIndex == 0)
-            {
-                msjComboModoVacio();
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+        //protected Boolean validarSelect()
+        //{
+        //    if (dropModo.SelectedIndex == 0)
+        //    {
+        //        msjComboModoVacio();
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
 
-        }
+        //}
 
-        protected Boolean validarDuplicadoRelaciones(string idTipoDocumental)
-        {
-            string td = idTipoDocumental;
-            string modo = dropModo.SelectedItem.Text;
-            try
-            {
-                conexion.Open();
-                string cadena = CdRelaciones.validarDuplicadosRelaciones(td, modo);
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
-                DataSet ds = new DataSet();
-                ds.Clear();
-                da.Fill(ds);
-                DataTable dt = ds.Tables[0];
-                DataRow row = dt.Rows[0];
-                string boo = row[0].ToString();
-                if (boo.Equals("False"))
-                {
-                    conexion.Close();
-                    return true;
-                }
-                else
-                {
-                    msjRelacionExiste();
-                    conexion.Close();
-                    return false;
-                }
+        //protected Boolean validarDuplicadoRelaciones(string idTipoDocumental)
+        //{
+        //    string td = idTipoDocumental;
+        //    string modo = dropModo.SelectedItem.Text;
+        //    try
+        //    {
+        //        conexion.Open();
+        //        string cadena = CdRelaciones.validarDuplicadosRelaciones(td, modo);
+        //        NpgsqlDataAdapter da = new NpgsqlDataAdapter(cadena, conexion);
+        //        DataSet ds = new DataSet();
+        //        ds.Clear();
+        //        da.Fill(ds);
+        //        DataTable dt = ds.Tables[0];
+        //        DataRow row = dt.Rows[0];
+        //        string boo = row[0].ToString();
+        //        if (boo.Equals("False"))
+        //        {
+        //            conexion.Close();
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            msjRelacionExiste();
+        //            conexion.Close();
+        //            return false;
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                string script = "alert('Error: " + ex + "');";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-                throw;
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string script = "alert('Error: " + ex + "');";
+        //        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+        //        throw;
+        //    }
+        //}
 
 
         protected void dropModo_SelectedIndexChanged(object sender, EventArgs e)
@@ -268,9 +284,10 @@ namespace GCR.Pages
             DateTime dt = DateTime.Now;
             string anio = dt.ToString("yyyy");
             string fechaHora = dt.ToString("MM-dd-yyyy-HH:mm:ss");
+            string nombre = "";
             try
             {
-                string cadena = CdConsecutivo.insertar(consec, anio, referencia, fechaHora);
+                string cadena = CdConsecutivo.insertar(consec, anio, referencia, fechaHora, nombre);
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
@@ -425,9 +442,5 @@ namespace GCR.Pages
 
         }
 
-        protected void btnConsec_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

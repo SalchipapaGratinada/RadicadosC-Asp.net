@@ -27,7 +27,7 @@
             </div>
         </div>
         <br />
-        <asp:Button runat="server" ID="btnConfig" Text=""  class="drupSelecionModo btn btn-light form-control-sm"  ToolTip="Consiguracion Nodo-Consecutivo" />
+        <asp:Button runat="server" ID="btnConfig" Text="" Visible="false" class="drupSelecionModo btn btn-light form-control-sm"  ToolTip="Consiguracion Nodo-Consecutivo" />
         <ajax:ModalPopupExtender ID="mpe" runat="server" TargetControlID="btnConfig" PopupControlID="ModalPanel" OkControlID="OKButton"></ajax:ModalPopupExtender>
         <div class="container">
             <div class="table small">
@@ -38,9 +38,9 @@
                                 <ItemTemplate runat="server">
                                     <asp:Button runat="server" ID="btnLeer" Text="Ver" class="btn btn-secondary form-control-sm" OnClick="btnLeer_Click" />
                                     <asp:Button runat="server" ID="btnActualizar" Text="Actualizar" class="btn btn-warning form-control-sm" OnClick="btnActualizar_Click" />
-                                    <asp:Button runat="server" ID="btnEliminar" Text="Eliminar" class="btn btn-danger form-control-sm" OnClick="btnEliminar_Click" />
-                                    <asp:Button runat="server" ID="btnmodo" Text="A" class="btn btn-light form-control-sm" OnClick="btnmodo_Click" ToolTip="Añadir Modo" />
-                                    <asp:Button runat="server" ID="btnmodoE" Text="E" class="btn btn-light form-control-sm" OnClick="btnmodoe_Click" ToolTip="Eliminar Modo" />
+                                    <asp:Button runat="server" ID="btnGestionModos" Text="Ges. Modos" class="btn btn-success form-control-sm" OnClick="btnGestionModos_Click" />
+                                    <asp:Button runat="server" ID="btnmodo" Visible="false" Text="A" class="btn btn-light form-control-sm" ToolTip="Añadir Modo" />
+                                    <asp:Button runat="server" ID="btnmodoE" Visible="false" Text="E" class="btn btn-light form-control-sm" ToolTip="Eliminar Modo" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <asp:Panel  ID="ModalPanel" runat="server" Width="500px">
+       <%-- <asp:Panel  ID="ModalPanel" runat="server" Width="500px">
             <div class="overlay" id="overlay">
                 <div class="popup" id="popup">
                     <h5>CONSECUTIVO - MODO</h5>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-        </asp:Panel>
+        </asp:Panel>--%>
     </form>
 
 </asp:Content>

@@ -47,6 +47,15 @@ function alertaPalabrasReservadas() {
     toastr.warning("Faltan Palabras reservadas En Formato.")
 }
 
+function alertaFaltaNombreConsec() {
+    toastr.warning("Escriba Nombre Del Consecutivo.")
+}
+
+function alertaSeleccioneModo() {
+    toastr.warning("Seleccione El Modo.")
+}
+
+
 
 
 

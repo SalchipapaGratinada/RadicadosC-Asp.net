@@ -121,6 +121,7 @@
     <Content Include="JavaScript\popup.js" />
     <Content Include="Pages\Consecutivo.aspx" />
     <Content Include="Pages\DrucC.aspx" />
+    <Content Include="Pages\DrucGMT.aspx" />
     <Content Include="Pages\DrucM.aspx" />
     <Content Include="Pages\DrucRl.aspx" />
     <Content Include="Pages\DrucTD.aspx" />
@@ -165,6 +166,13 @@
     </Compile>
     <Compile Include="Pages\DrucC.aspx.designer.cs">
       <DependentUpon>DrucC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DrucGMT.aspx.cs">
+      <DependentUpon>DrucGMT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\DrucGMT.aspx.designer.cs">
+      <DependentUpon>DrucGMT.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\DrucM.aspx.cs">
       <DependentUpon>DrucM.aspx</DependentUpon>

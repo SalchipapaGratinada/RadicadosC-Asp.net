@@ -97,7 +97,13 @@ namespace GCR.Pages
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-
+            int idRelacion = Convert.ToInt32(auxId);
+            string cadena = CdRelaciones.eliminarDirectoDesdeRelaciones(idRelacion);
+            NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+            conexion.Open();
+            cmd.ExecuteNonQuery();
+            conexion.Close();
+            Response.Redirect("Relaciones.aspx");
         }
 
         protected void btnAtras_Click(object sender, EventArgs e)
@@ -280,9 +286,10 @@ namespace GCR.Pages
             DateTime dt = DateTime.Now;
             string anio = dt.ToString("yyyy");
             string fechaHora = dt.ToString("MM-dd-yyyy-HH:mm:ss");
+            string nombre = "";
             try
             {
-                string cadena = CdConsecutivo.insertar(consec, anio, referencia, fechaHora);
+                string cadena = CdConsecutivo.insertar(consec, anio, referencia, fechaHora, nombre);
                 NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
                 conexion.Open();
                 cmd.ExecuteNonQuery();

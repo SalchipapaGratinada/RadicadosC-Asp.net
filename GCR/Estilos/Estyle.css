@@ -62,7 +62,7 @@
 }
 
 .infoFormato {
-    margin-top: -8.2rem;
+    margin-top: -10.2rem;
     margin-left: 68.8rem;
     width: 250px;
     height: 325px;
@@ -74,6 +74,32 @@
     border-bottom-right-radius: 5%;
 }
 
+.divDrucGMT {
+    width: 530px;
+    height: 400px;
+    border: solid 1px black;
+    margin-left: 30rem;
+    margin-top: 2rem;
+    border-top-right-radius: 5%;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.dropConsec {
+    width: 13rem;
+    border: 2px solid #BBBBBB;
+}
+
+.containerDrupAgregados{
+    margin-left:4rem;
+}
+.containerModosDisponibles {
+    margin-left: 2rem;
+}
 
 
 

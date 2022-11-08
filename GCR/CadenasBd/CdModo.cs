@@ -50,6 +50,24 @@ namespace GCR.CadenasBd
             return cd;
             
         }
+        public static string cargarDropModoSoloDisponibles(int id)
+        {
+            string cd = "SELECT md.id AS id, md.nombre As nombre FROM modo AS md " +
+                " WHERE NOT EXISTS(SELECT NULL FROM detalletdm AS dtdm" +
+                " WHERE dtdm.id_modo = md.id AND dtdm.id_tipodocumental = "+id+")";
+            return cd;
+
+        }
+
+        public static string cargarDropModoSoloAgregados(int id)
+        {
+            string cd = "SELECT md.id AS id, md.nombre As nombre FROM modo AS md" +
+                " LEFT JOIN detalletdm AS dtdm ON md.id = dtdm.id_modo WHERE dtdm.id_tipodocumental = "+id+"" +
+                " AND md.id = dtdm.id_modo ORDER BY md.id; ";
+            return cd;
+        }
+
+       
 
 
     }

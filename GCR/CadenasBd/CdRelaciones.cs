@@ -70,6 +70,12 @@ namespace GCR.CadenasBd
             return cd;
         }
 
+        public static string eliminarDirectoDesdeRelaciones(int idRelacion)
+        {
+            string cd = "DELETE FROM detalletdm WHERE id = " + idRelacion + ";";
+            return cd;
+        }
+
         public static string buscar(string cadena)
         {
             string cd = "SELECT dtdm.id, td.nombre AS TipoDocumental, md.nombre AS Modo,  cons.consec AS NuConsec , " +

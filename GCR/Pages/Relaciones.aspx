@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="mx-auto" style="width:300px">
-                    <asp:Button runat="server" ID="btnCrearRl"  CssClass="btn btn-primary form-control-sm btnCrear" Text="Crear" OnClick="btnCrearRl_Click" />
+                    <asp:Button runat="server" ID="btnCrearRl" Visible="false" CssClass="btn btn-primary form-control-sm btnCrear" Text="Crear" OnClick="btnCrearRl_Click" />
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                             <asp:TemplateField HeaderText="Opciones">
                                 <ItemTemplate>
                                     <asp:Button runat="server" ID="btnLeer" Text="Ver" class="btn btn-secondary form-control-sm" OnClick="btnLeer_Click" />
-                                    <asp:Button runat="server" ID="btnActualizar" Text="Actualizar" class="btn btn-warning form-control-sm" OnClick="btnActualizar_Click" />
+                                    <asp:Button runat="server" ID="btnActualizar" Visible="false" Text="Actualizar" class="btn btn-warning form-control-sm" OnClick="btnActualizar_Click" />
                                     <asp:Button runat="server" ID="btnEliminar" Text="Eliminar" class="btn btn-danger form-control-sm" OnClick="btnEliminar_Click" />
                                 </ItemTemplate>
                             </asp:TemplateField>
