@@ -55,6 +55,11 @@ function alertaSeleccioneModo() {
     toastr.warning("Seleccione El Modo.")
 }
 
+function alertaCorchetes() {
+    toastr.warning("Faltan Corchetes En El Formato.")
+}
+
+
 
 
 

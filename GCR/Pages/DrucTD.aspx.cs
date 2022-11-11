@@ -87,45 +87,50 @@ namespace GCR.Pages
             string nombre = tbNombre.Text;
             string formato = tbFormato.Text;
             formato = formato.ToUpper();
-            if (tbFormato.Text.Contains("[TP]") && tbFormato.Text.Contains("[M]") && tbFormato.Text.Contains("CON"))
+            if (corchetesCorrecto(formato))
             {
-                if (tbFormato.Text.Contains(" "))
+                if (tbFormato.Text.Contains("[TP]") && tbFormato.Text.Contains("[M]") && tbFormato.Text.Contains("CON"))
                 {
-                    msjEspacios();
-                }
-                else
-                {
-                    if (validarCampos(codigo) || validarCampos(nombre) || validarCampos(formato))
+                    if (tbFormato.Text.Contains(" "))
                     {
-                        msjCampoVacio();
+                        msjEspacios();
                     }
                     else
                     {
-                        try
+                        if (validarCampos(codigo) || validarCampos(nombre) || validarCampos(formato))
                         {
-                            string cadena = CdTipoDocumental.insertar(codigo, nombre, formato);
-                            NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
-                            conexion.Open();
-                            cmd.ExecuteNonQuery();
-                            conexion.Close();
-                            Response.Redirect("TipoDocumental.aspx");
+                            msjCampoVacio();
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            string script = "alert('Error: " + ex + "');";
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-                            throw;
-                        }
+                            try
+                            {
+                                string cadena = CdTipoDocumental.insertar(codigo, nombre, formato);
+                                NpgsqlCommand cmd = new NpgsqlCommand(cadena, conexion);
+                                conexion.Open();
+                                cmd.ExecuteNonQuery();
+                                conexion.Close();
+                                Response.Redirect("TipoDocumental.aspx");
+                            }
+                            catch (Exception ex)
+                            {
+                                string script = "alert('Error: " + ex + "');";
+                                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+                                throw;
+                            }
 
+                        }
                     }
+                }
+                else
+                {
+                    msjPalabrasReservadas();
                 }
             }
             else
             {
-                msjPalabrasReservadas();
-            }
-           
-            
+                msjCorchetesFaltantes();
+            }            
         }
 
         protected void btnAtras_Click(object sender, EventArgs e)
@@ -197,7 +202,32 @@ namespace GCR.Pages
             tbNombre.Enabled = false;
             tbFormato.Enabled = false;
         }
+        protected Boolean corchetesCorrecto(string formato)
+        {
+            int corcheteAbre = 0;
+            int corcheteCierra = 0;
+            for (int i = 0; i < formato.Length; i++)
+            {
+                char caracter = formato[i];
+                if (caracter.Equals('['))
+                {
+                    corcheteAbre++;
+                }
+                if (caracter.Equals(']'))
+                {
+                    corcheteCierra++;
+                }
 
+            }
+            if (corcheteAbre == corcheteCierra)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         protected void msjCampoVacio()
         {
@@ -214,7 +244,12 @@ namespace GCR.Pages
             string script = string.Format("alertaPalabrasReservadas();");
             ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaPalabrasReservadas", script, true);
         }
+        protected void msjCorchetesFaltantes()
+        {
+            string script = string.Format("alertaCorchetes();");
+            ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "alertaCorchetes", script, true);
+        }
 
-
+        
     }
 }

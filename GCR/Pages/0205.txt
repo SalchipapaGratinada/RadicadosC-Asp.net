@@ -1,0 +1,20 @@
+Mauxi
+
+select * from ma_usuario where usuario_identificacion='55304645'
+select * from ma_fp_enrolamiento where id_usuario='61750'
+select * from ma_fp_enrolamiento where id_usuario='64140'
+SELECT usuario_identificacion, count(*) FROM ma_usuario
+where  sede_id=285 GROUP BY usuario_identificacion HAVING COUNT(*)>1;
+
+san jose
+select * from ma_usuario where usuario_identificacion='1097501595'
+select * from reca_online where usuario_id='58285'
+select * from reca_online_detalle where recarga_id='70680'
+
+parrish
+select * from ma_usuario where usuario_identificacion='1044424161'  44766
+select * from ma_usuario where usuario_identificacion='123456'   64457
+
+select * from venta_cabecera where usuario_id='44766' ORDER BY venta_cab_fecha DESC 
+
+ewo
